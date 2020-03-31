@@ -19,27 +19,27 @@ public class MinAdjSwapsToMakePalindrome {
 
     private static int getMinSwaps(String str) {
         int result = 0;
-        char[] s1 = str.toCharArray();
+        char[] charArray = str.toCharArray();
         if(!isPalindromicString(str))
             return -1;
-        int i = 0;
-        int j = s1.length - 1;
-        int k = j;
-        while(i < j) {
-            k = j;
-            while(s1[i] != s1[k] && k > i)
-                k--;
-            if(s1[i] == s1[k] && i != k) {
-                while(k < j) {
-                    swapItems(s1,k);
-                    k++;
+        int start = 0;
+        int end = charArray.length - 1;
+        int curr = end;
+        while(start < end) {
+            curr = end;
+            while(charArray[start] != charArray[curr] && curr > start)
+                curr--;
+            if(charArray[start] == charArray[curr] && start != curr) {
+                while(curr < end) {
+                    swapItems(charArray,curr);
+                    curr++;
                     result++;
                 }
-                i++;
-                j--;
+                start++;
+                end--;
             }
             else {
-                swapItems(s1,i);
+                swapItems(charArray,start);
                 result++;
             }
 
