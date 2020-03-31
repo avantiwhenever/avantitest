@@ -8,6 +8,11 @@ public class LexicographicallySmallestString {
         printResult("abczd");
         printResult("abcxdze");
         printResult("abcd");
+        System.out.println(1 << 2);
+        System.out.println(1 << 3);
+        System.out.println(1 << 4);
+        System.out.println(1 << 5);
+
     }
 
     private static void printResult (String str) {
