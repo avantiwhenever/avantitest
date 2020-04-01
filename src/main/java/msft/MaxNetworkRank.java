@@ -1,7 +1,17 @@
 package msft;
 
 import java.util.Arrays;
+/*
 
+https://leetcode.com/discuss/interview-question/364760/
+It's not clear what is the eactly the network rank.
+Is network rank will be there of each edge. That means it will have m network rank
+and we have to find the pair of cities(edge) which have the highest network rank.
+ If this is the case just use a data structure like an array to store the
+  count of other nodes connected to a node.
+  Then just iterate on the edges and see if count of cities
+  on the this edge's end is max or not.
+ */
 public class MaxNetworkRank {
 
     public static void main(String[] args) {
@@ -12,12 +22,12 @@ public class MaxNetworkRank {
     }
 
     private static void printResult (int[] nums1,int[] nums2, int length) {
-        System.out.println("Printing maxSumOfTwoDigits of two digits "
+        System.out.println("Printing getMaxNetworkRank of two digits "
                 + Arrays.toString(nums1) + " " + Arrays.toString(nums2) + " " + length +
-                " =" + solution(nums1, nums2, length));
+                " =" + getMaxNetworkRank(nums1, nums2, length));
     }
 
-    public static int solution(int[] A, int[] B, int N) {
+    private static int getMaxNetworkRank(int[] A, int[] B, int N) {
         int maxRank = 0;
         int edgesLen = A.length;
 

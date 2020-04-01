@@ -28,14 +28,12 @@ public class LongestSemiAlternatingSubstring {
         char compareAgainstChar = input.charAt(start);
         int count = 1;
         int maxLen = 1;
-        int maxLengthStart = 0;
 
         while (currIndex < input.length()) {
             if (input.charAt(currIndex) == compareAgainstChar) {
                 count++;
                 if (count == 2 && currIndex - start + 1 > maxLen) {
                     maxLen = currIndex - start + 1;
-                    maxLengthStart = start;
                 } else {
                     //reset the start
                     start = currIndex - 1;
@@ -48,10 +46,8 @@ public class LongestSemiAlternatingSubstring {
                 // check max size
                 if (currIndex - start + 1 > maxLen) {
                     maxLen = currIndex - start + 1;
-                    maxLengthStart = start;
                 }
             }
-
             currIndex++;
         }
         return String.valueOf(maxLen);
