@@ -1,69 +1,80 @@
 package linkedList;
 
-public class SinglyLinkedList {
+public class DoublyLinkedList {
     static class Node {
         int val;
         Node next;
-
+        Node prev;
         public Node(int val) {
             this.val = val;
             this.next = null;
+            this.prev = null;
         }
     }
     Node root = null;
 
-    public SinglyLinkedList(int val) {
+    private DoublyLinkedList(int val) {
         root = new Node(val);
     }
 
     public static void main(String args[]) {
         Node node11 = new Node(11);
         Node node22 = new Node(22);
-        SinglyLinkedList singlyLinkedList = new SinglyLinkedList(10);
-        singlyLinkedList.printNodes();
-        singlyLinkedList.addToStart(node11);
-        singlyLinkedList.printNodes();
-        singlyLinkedList.addToEnd(node22);
-        singlyLinkedList.addToEnd(45);
-        singlyLinkedList.printNodes();
-        singlyLinkedList.addToStart(11);
-        singlyLinkedList.findFirstOccurance(11);
-        singlyLinkedList.findLastOccurance(11);
-        singlyLinkedList.findFirstOccurance(33);
-        singlyLinkedList.findLastOccurance(33);
-        singlyLinkedList.addToStart(33);
-        singlyLinkedList.printNodes();
-        singlyLinkedList.deleteNodeAtBeginning();
-        singlyLinkedList.printNodes();
-        singlyLinkedList.deleteNodeAtEnd();
-        singlyLinkedList.printNodes();
-        singlyLinkedList.deleteBeforeNode(node22);
-        singlyLinkedList.printNodes();
-        singlyLinkedList.deleteAfterNode(node11);
-        singlyLinkedList.printNodes();
-        singlyLinkedList.addToStart(112);
-        singlyLinkedList.addToStart(32);
-        singlyLinkedList.addToStart(43);
-        singlyLinkedList.addToStart(63);
-        singlyLinkedList.printNodes();
+        DoublyLinkedList doublyLinkedList = new DoublyLinkedList(10);
+        doublyLinkedList.printNodes();
+        System.out.println("Add to start");
+        doublyLinkedList.addToStart(node11);
+        doublyLinkedList.printNodes();
+        System.out.println("Add to end");
+        doublyLinkedList.addToEnd(node22);
+        doublyLinkedList.addToEnd(45);
+        doublyLinkedList.printNodes();
+        System.out.println("Add to start");
+        doublyLinkedList.addToStart(11);
+        System.out.println("find First Occurance");
+        doublyLinkedList.findFirstOccurance(11);
+        doublyLinkedList.findLastOccurance(11);
+        doublyLinkedList.findFirstOccurance(33);
+        doublyLinkedList.findLastOccurance(33);
+        System.out.println("Add to start");
+        doublyLinkedList.addToStart(33);
+        doublyLinkedList.printNodes();
+        System.out.println("delete Node At Beginning");
+        doublyLinkedList.deleteNodeAtBeginning();
+        doublyLinkedList.printNodes();
+        System.out.println("delete Node At End");
+        doublyLinkedList.deleteNodeAtEnd();
+        doublyLinkedList.printNodes();
+        System.out.println("delete Before Node");
+        doublyLinkedList.deleteBeforeNode(node22);
+        doublyLinkedList.printNodes();
+        System.out.println("delete After Node");
+        doublyLinkedList.deleteAfterNode(node11);
+        doublyLinkedList.printNodes();
+        System.out.println("add To Start");
+        doublyLinkedList.addToStart(112);
+        doublyLinkedList.addToStart(32);
+        doublyLinkedList.addToStart(43);
+        doublyLinkedList.addToStart(63);
+        doublyLinkedList.printNodes();
+        System.out.println("remove Nth Node");
+        doublyLinkedList.removeNthNode(2);
+        doublyLinkedList.printNodes();
+        System.out.println("reverse List");
+        doublyLinkedList.reverseList();
+        doublyLinkedList.printNodes();
 
-        singlyLinkedList.removeNthNode(2);
-        singlyLinkedList.printNodes();
-
-        singlyLinkedList.reverseList();
-        singlyLinkedList.printNodes();
-
-//        System.out.println("Middle Node");
-//        Node middleNode = singlyLinkedList.findMiddleNode();
-//        printNodes(middleNode);
-        singlyLinkedList.removeNthNode(2);
-        singlyLinkedList.printNodes();
         System.out.println("Middle Node");
-        Node middleNode2 = singlyLinkedList.findMiddleNode();
+        Node middleNode = doublyLinkedList.findMiddleNode();
+        printNodes(middleNode);
+        doublyLinkedList.removeNthNode(2);
+        doublyLinkedList.printNodes();
+        System.out.println("Middle Node");
+        Node middleNode2 = doublyLinkedList.findMiddleNode();
         printNodes(middleNode2);
 
-        SinglyLinkedList oneLinkedList = new SinglyLinkedList(10);
-        SinglyLinkedList twoLinkedList = new SinglyLinkedList(9);
+        DoublyLinkedList oneLinkedList = new DoublyLinkedList(10);
+        DoublyLinkedList twoLinkedList = new DoublyLinkedList(9);
         oneLinkedList.addToEnd(13);
         oneLinkedList.addToEnd(16);
         oneLinkedList.addToEnd(90);
@@ -73,7 +84,7 @@ public class SinglyLinkedList {
         twoLinkedList.addToEnd(12);
         twoLinkedList.addToEnd(32);
         twoLinkedList.printNodes();
-
+        System.out.println("merge Two Linked Lists");
         Node node = mergeTwoLinkedLists(oneLinkedList.root, twoLinkedList.root);
         printNodes(node);
     }
@@ -221,7 +232,13 @@ public class SinglyLinkedList {
     }
 
     private void addToStart(Node newNode) {
+        if (root == null) {
+            root = newNode;
+            return;
+        }
         newNode.next = root;
+        newNode.prev = root.prev;
+        root.prev = newNode;
         root = newNode;
     }
 
@@ -233,6 +250,7 @@ public class SinglyLinkedList {
             while (temp != null && temp.next != null) {
                 temp = temp.next;
             }
+            newNode.prev = temp;
             temp.next = newNode;
         }
     }
