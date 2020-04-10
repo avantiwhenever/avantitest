@@ -112,14 +112,16 @@ public class DoublyLinkedList {
             count++;
         }
         if (count == (n-1) && prev != null && prev.next != null) {
-            prev.next = prev.next.next;
+            Node nextOfNext = prev.next.next;
+            nextOfNext.prev = prev;
+            prev.next = nextOfNext;
         }
     }
 
     private static Node mergeTwoLinkedLists(Node node1, Node node2) {
         Node result = new Node(0);
         Node dummy = result;
-
+        Node prev = null;
         while (node1 != null && node2 != null) {
             if (node1.val < node2.val) {
                 dummy.next = node1;
@@ -128,12 +130,17 @@ public class DoublyLinkedList {
                 dummy.next = node2;
                 node2 = node2.next;
             }
+            dummy.prev = prev;
+            prev = dummy;
             dummy = dummy.next;
         }
         dummy.next = node1 != null ? node1 : node2;
         return result.next;
     }
 
+    //
+    //  3 <----> 4 <----> 5
+    //
     private void reverseList() {
         if (root == null) {
             return;
@@ -143,6 +150,7 @@ public class DoublyLinkedList {
         while(temp != null) {
             Node nextNode = temp.next;
             temp.next = prev;
+            temp.prev = nextNode;
             prev = temp;
             temp = nextNode;
         }
@@ -150,17 +158,22 @@ public class DoublyLinkedList {
     }
 
     private void deleteBeforeNode(Node node) {
-        Node temp = root;
-        Node prev = null;
-        Node prevprev = null;
-        while (temp != null && node != temp) {
-            prevprev = prev;
-            prev = temp;
-            temp = temp.next;
-            System.out.println(prev.val);
+        if (node != null) {
+            Node prev = node.prev;
+            deleteNode(prev);
         }
-        if (prevprev != null) {
-            prevprev.next = prevprev.next.next;
+    }
+
+    private void deleteNode(Node node) {
+        if (node != null) {
+            Node prev = node.prev;
+            Node next = node.next;
+            if (prev != null) {
+                prev.next = next;
+            }
+            if (next != null) {
+                next.prev = prev;
+            }
         }
     }
 
@@ -175,7 +188,13 @@ public class DoublyLinkedList {
     }
 
     private void deleteNodeAtBeginning() {
-        root = root.next;
+        if (root != null) {
+            Node next = root.next;
+            if (next != null) {
+                next.prev = null;
+            }
+            root = root.next;
+        }
     }
 
     private void deleteNodeAtEnd() {
@@ -265,10 +284,18 @@ public class DoublyLinkedList {
 
     private static void printNodes(Node node) {
         Node temp = node;
+        Node prev = null;
         System.out.print("[");
         while (temp != null) {
             System.out.print(temp.val + ",");
+            prev = temp;
             temp = temp.next;
+        }
+        System.out.println("]");
+        System.out.print("[");
+        while (prev != null) {
+            System.out.print(prev.val + ",");
+            prev = prev.prev;
         }
         System.out.println("]");
     }

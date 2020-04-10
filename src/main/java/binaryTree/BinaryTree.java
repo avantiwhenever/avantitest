@@ -1,4 +1,4 @@
-package linkedList;
+package binaryTree;
 
 public class BinaryTree {
 
