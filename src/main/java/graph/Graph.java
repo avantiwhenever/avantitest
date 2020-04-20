@@ -7,7 +7,7 @@ public class Graph {
     private int vertices;   // No. of vertices
     private LinkedList<Integer>[] adjList;
 
-    public Graph(int vertices) {
+    private Graph(int vertices) {
         this.vertices = vertices;
         this.adjList = new LinkedList[vertices];
         for (int i=0; i<vertices; ++i)
@@ -71,10 +71,9 @@ public class Graph {
 
     // The function to do DFS traversal. It uses recursive DFSUtil()
     private void printDFS(int v) {
-// Mark all the vertices as not visited(set as
+        // Mark all the vertices as not visited(set as
         // false by default in java)
         boolean visited[] = new boolean[vertices];
-
         // Call the recursive helper function to print DFS traversal
         DFSUtil(v, visited);
     }
