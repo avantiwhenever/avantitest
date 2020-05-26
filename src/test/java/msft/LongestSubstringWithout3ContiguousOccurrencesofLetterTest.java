@@ -11,8 +11,8 @@ public class LongestSubstringWithout3ContiguousOccurrencesofLetterTest extends T
     public void tearDown() throws Exception {
     }
 
-    public void testValidLongestSubstring() {
-        assertEquals(LongestSubstringWithout3ContiguousOccurrencesofLetter
-                .validLongestSubstring("aabbaabbaabbaabb"), "aabbaabbaabbaabb" );
-    }
+//    public void testValidLongestSubstring() {
+//        assertEquals(LongestSubstringWithout3ContiguousOccurrencesofLetter
+//                .validLongestSubstring("aabbaabbaabbaabb"), "aabbaabbaabbaabb" );
+//    }
 }
