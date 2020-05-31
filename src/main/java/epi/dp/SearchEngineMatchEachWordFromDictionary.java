@@ -1,8 +1,13 @@
 package epi.dp;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-public class BedBathAandBeyond {
+public class SearchEngineMatchEachWordFromDictionary {
     /*
     Suppose you are designing a search engine. In addition to getting keywords from
 a page's content, you would like to get keywords from Uniform Resource Locators
@@ -19,18 +24,18 @@ concatenation of dictionary words.
      */
 
     public static void main(String args[]) {
-        printResults("avanti", Arrays.asList("a","ava","anti"));
-        printResults("bedbathandbeyond.com", Arrays.asList("bed", "bath", "beyond", "bat", "hand"));
+        printResults("avanti", Arrays.asList("a","av","anti"));
+        printResults("bedbathandbeyond", Arrays.asList("bed", "bath", "and", "beyond", "bat", "hand"));
     }
 
     private static void printResults(String string, List<String> list) {
-        List<String> result = decomposelntoDictionaryWords(string, new HashSet<>(list));
+        List<String> result = decomposeEntireStringIntoDictionaryWords(string, new HashSet<>(list));
         System.out.println("Getting the string : "+ string +
                 " and dictionary as : " + list +
                 " : result is : " + result);
     }
 
-    public static List<String> decomposelntoDictionaryWords(
+    public static List<String> decomposeEntireStringIntoDictionaryWords(
             String domain, Set<String> dictionary) {
         int[] lastLength = new int[domain.length()];
         Arrays.fill(lastLength , -1);
@@ -73,10 +78,9 @@ concatenation of dictionary words.
 
             }
             System.out.println("decompositions" + decompositions);
-
             Collections.reverse(decompositions);
         }
-        System.out.println("decompositions" + decompositions);
+        System.out.println("final decompositions" + decompositions);
         return decompositions;
     }
 }
