@@ -24,7 +24,7 @@ concatenation of dictionary words.
      */
 
     public static void main(String args[]) {
-        printResults("avanti", Arrays.asList("a","av","anti"));
+        printResults("avanti", Arrays.asList("a","av","ant"));
         printResults("bedbathandbeyond", Arrays.asList("bed", "bath", "and", "beyond", "bat", "hand"));
     }
 
@@ -35,7 +35,7 @@ concatenation of dictionary words.
                 " : result is : " + result);
     }
 
-    public static List<String> decomposeEntireStringIntoDictionaryWords(
+    private static List<String> decomposeEntireStringIntoDictionaryWords(
             String domain, Set<String> dictionary) {
         int[] lastLength = new int[domain.length()];
         Arrays.fill(lastLength , -1);
@@ -46,8 +46,8 @@ concatenation of dictionary words.
         // If domain.substring(0, i + 1) is a valid word, set lastLength[i] to the
         // length of that word.
             if (dictionary.contains(domain.substring(0 , i + 1))) {
-                System.out.println("lastlength " + lastLength.length);
                 lastLength[i] = i + 1;
+                System.out.println("lastlength " + Arrays.toString(lastLength));
             }
             // If lastLength[i] = -1 look for j < i such that domain.substring(SI, j +
             // 1) has a valid decomposition and domain.substring(j + 1, i + 1) is a
@@ -58,18 +58,23 @@ concatenation of dictionary words.
                     if (lastLength[j] != -1
                             && dictionary.contains(domain.substring(j + 1, i + 1))) {
                         lastLength[i] = i - j;
+                        System.out.println("updated lastlength " + Arrays.toString(lastLength));
                         break ;
                     }
                 }
             }
         }
-        System.out.println(Arrays.toString(lastLength));
+        System.out.println("lastlength " + Arrays.toString(lastLength));
         System.out.println("dictionary" + dictionary);
 
         List<String> decompositions = new ArrayList<>();
-        if (lastLength[lastLength.length - 1] != -1) {
+        int count = lastLength.length -1;
+        while (count >0 && lastLength[count] == -1) {
+            count--;
+        }
+        if (lastLength[count] != -1) {
         // domain can be assembled by valid words.
-            int idx = domain.length() - 1;
+            int idx = count;
             while (idx >= 0) {
                 decompositions.add(
                         domain.substring(idx + 1 - lastLength[idx], idx + 1));
