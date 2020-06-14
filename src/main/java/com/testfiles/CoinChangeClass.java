@@ -1,7 +1,5 @@
 package com.testfiles;
 
-import com.sun.tools.javac.util.Assert;
-
 import java.util.Arrays;
 
 public class CoinChangeClass {
