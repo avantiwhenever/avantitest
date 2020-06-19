@@ -40,7 +40,9 @@ Output: 26
     }
 
     private static void printResult(List<String> wordList) {
-        System.out.println("List of words is- "  + Arrays.toString(wordList.toArray()) + " -> Length of max word is " + maxLength(wordList));
+        System.out.println("List of words is- "
+                + Arrays.toString(wordList.toArray())
+                + " -> Length of max word is " + maxLength(wordList));
     }
 
     private static int maxLength(List<String> arr) {
