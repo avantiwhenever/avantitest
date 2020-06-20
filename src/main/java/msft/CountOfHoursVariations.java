@@ -52,6 +52,7 @@ Testcase#4 (4,4,4,4) => should return 0
                 //if there are 1 or 3 elements
                 swap(array, 0, size - 1);
             } else {
+                // if there are 2 or 4 elements0
                 swap(array, i, size - 1);
             }
         }
